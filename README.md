@@ -1,5 +1,6 @@
 # tofu
-A quick, easy and modular tool for hacking offline Windows drives and bypassing login screens. Can do hashdumps, OSK-Backdoors, user enumeration and more. 
+A quick, easy and modular tool for hacking offline Windows drives and bypassing login screens. Can do hashdumps, OSK-Backdoors, user enumeration and more.<br> 
+<img src="https://raw.githubusercontent.com/stoatsec/tofu/main/tofu.png"></img>
 
 <h2> How it works : </h2>
 When a Windows machine is shut down, unless it has Bitlocker or another encryption service enabled, it's hard drive contains everything stored on the device as if it was unlocked. This means that you can boot from an operating system from a bootable USB and access it's files - or even just connect the hard drive to another computer. This tool helps for the part after booting from another OS (like linux); it has utilities that can dump NTLM password hashes, list users and install backdoors to spawn an elevated command prompt at the login screen. 
