@@ -46,7 +46,7 @@ def __main__(drive_name,drive_format):
 						os.remove("tofu_tmp/windows_filesystem/Windows/System32/osk.exe")
 						shutil.move("tofu_tmp/windows_filesystem/Windows/System32/osk_tofu_backup.exe","tofu_tmp/windows_filesystem/Windows/System32/osk.exe")
 						os.remove("tofu_tmp/windows_filesystem/Windows/System32/osk_tofu_backup.exe")
-						
+						print("[+] Unbackdoored")
 				else:
 					print("[-] Tofu CMD backup doesn't exist at Windows/System32/osk_tofu_backup.exe")
 			else:
