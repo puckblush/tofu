@@ -27,5 +27,9 @@ Current Modules:<br>
 'modules' : List modules ; This will load the module names into memory, so you need to run this command before selecting a module<br>
 'use' : Use the selected module<br>
 
+<h2>Setup : </h2><i>
+pip3 install -r requirements.txt<br>
+sudo python3 tofu.py</i>
+
 <h3><b>Warning : If you're writing a module, make sure it won't do any damage before running it<br> </b></h3>
 
