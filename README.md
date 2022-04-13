@@ -16,14 +16,16 @@ When a Windows machine is shut down, unless it has Bitlocker or another encrypti
 
 <h2>Modules : </h2>
 Because tofu works on modules, it can be constantly expanded for different purposes. See the 'modules' section for examples.<br>
-Current Modules:
-1. hashdump.py - Dumps NTLM hashes from the target hard drive<br>
-2. osk_backdoor.py - Backdoor osk.exe to bypass the login; also includes an 'unbackdoor' module<br>
-3. list_users.py - List the users with a profile on the hard drive<br>
+Current Modules:<br>
+1. <i>hashdump.py</i> - Dumps NTLM hashes from the target hard drive<br>
+2. <i>osk_backdoor.py</i> - Backdoor osk.exe to bypass the login; also includes an 'unbackdoor' module<br>
+3. <i>list_users.py</i> - List the users with a profile on the hard drive<br>
 
 <h2>Usage : </h2>
-'list' : List all hard drives at /dev/ with a format of MSDOS, NTFS or -FVE-FS- (BITLOCKER) ; This will load the drive paths into memory
-'usedrive' : Set the drive to use; can use numbers assigned from the 'list' command
-'modules' : List modules ; This will load the module names into memory, so you need to run this command before selecting a module
-'use' : Use the selected module
+'list' : List all hard drives at /dev/ with a format of MSDOS, NTFS or -FVE-FS- (BITLOCKER) ; This will load the drive paths into memory<br>
+'usedrive' : Set the drive to use; can use numbers assigned from the 'list' command<br>
+'modules' : List modules ; This will load the module names into memory, so you need to run this command before selecting a module<br>
+'use' : Use the selected module<br>
+
+<h3><b>Warning : If you're writing a module, make sure it won't do any damage before running it<br> </b></h3>
 
