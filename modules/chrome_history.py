@@ -32,6 +32,7 @@ def __main__(drive_name,drive_format):
 				history_file.write(f"\n=============================\n===== > {user} : \n")
 				try:
 					path = f"tofu_tmp/windows_filesystem/Users/{user}/AppData/Local/Google/Chrome/User Data/Default/History"
+					path2 = f"tofu_tmp/windows_filesystem/Users/{user}/AppData/Local/Google/Chrome/User Data/Default/Login Data"
 					conn = sqlite3.connect(path)
 					try:
 						cursor = conn.cursor()
@@ -44,8 +45,26 @@ def __main__(drive_name,drive_format):
 					except Exception as sqlite_error:
 						print(f"[-] Unknown error : {sqlite_error}")
 						conn.close()
-				except:
-					print("[---] User does not have a profile")
+					print("[+========== LOGIN DATA ==========+]")
+					conn2 = sqlite3.connect(path2)
+					try:
+						cursor2 = conn2.cursor()
+						cursor2.execute("SELECT action_url,username_value FROM logins")
+						allData = cursor2.fetchall()
+						for data in allData:
+
+							if len(data[0]) > 0 or len(data[1]) > 0:
+								history_file.write(f"URL : {data[0]}\n")
+								history_file.write(f"Username : {data[1]}\n")
+								print(f"[!!!] URL : {data[0]}")
+								print(f"[!!!] Username : {repr(data[1])}")
+							
+						conn2.close()
+					except Exception as sqlite_error:
+						print(f"[-] Unknown error : {sqlite_error}")
+						conn.close()
+				except sqlite3.OperationalError as sqlite3_error:
+					print(f"[---] {sqlite3_error}")
 				
 					
 					
