@@ -1,5 +1,5 @@
 # tofu
-A quick, easy and modular tool for hacking offline Windows drives and bypassing login screens. Can do hashdumps, OSK-Backdoors, user enumeration and more.<br> 
+A quick, easy and modular tool for hacking offline Windows drives and bypassing login screens. Can do hashdumps, OSK-Backdoors, user enumeration and more. <b>You must have physical access to the computer to use this</b><br> 
 <img src="https://raw.githubusercontent.com/stoatsec/tofu/main/tofu.png"></img>
 
 <h2> How it works : </h2>
