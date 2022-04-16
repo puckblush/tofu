@@ -29,6 +29,7 @@ Current Modules:<br>
 'use' : Use the selected module<br>
 
 <h2>Setup : </h2><i>
+ (need to run as root because PyPyKatz' path directory is dependent on the current user)<br>
 pip3 install -r requirements.txt<br>
 sudo python3 tofu.py</i>
 
