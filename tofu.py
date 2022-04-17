@@ -76,7 +76,7 @@ class tofu:
 		[use] - Use module
 		''')
 	def list_modules():
-		modules = glob.glob("./tofu_modules/*.py")
+		modules = glob.glob("./modules/*.py")
 		return modules
 	def check_valid_module(module):
 		if module in tofu.module_list:
@@ -86,7 +86,7 @@ class tofu:
 	def load_module(module_name):
 		module_name = module_name.replace(".py","")
 		print(f"[...] Loading {module_name}")
-		current_module = importlib.import_module("tofu_modules."+module_name)
+		current_module = importlib.import_module("modules."+module_name)
 		try:
 			current_module.__main__(tofu.drive_path,tofu.drive_format)
 				
