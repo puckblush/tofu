@@ -23,6 +23,7 @@ Current Modules:<br>
 3. <i>list_users.py</i> - List the users with a profile on the Windows filesystem<br>
 4. <i>chrome_history.py</i> - Dump chrome history of all users on the Windows filesystem<br>
 5. <i>get_dpapi_masterkeys.py</i> - Dump DPAPI master keys from the Windows filesystem<br>
+6. <i>enum_unattend.py</i> - Enumerate unattend files
 
 <h1>Usage : </h1>
 'list' : List all storage devices at /dev/ with a format of MSDOS, NTFS or -FVE-FS- (BITLOCKER) ; This will load the drive paths into memory<br>
