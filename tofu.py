@@ -79,7 +79,7 @@ class tofu:
 		modules = glob.glob("./modules/*.py")
 		return modules
 	def check_valid_module(module):
-		if module in tofu.module_list:
+		if module in tofu.module_list or module+".py" in tofu.module_list:
 			return True
 		else:
 			return False
