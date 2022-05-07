@@ -59,7 +59,7 @@ class tofu:
 	def banner():
 		print('''
 [ 		tofu  	   ]
-[	   by stoatsec     ]
+[	   by puckblush    ]
 [		           ]
 		''')
 	def help():
