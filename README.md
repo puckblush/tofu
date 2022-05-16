@@ -1,5 +1,5 @@
 # tofu
-A quick, easy and modular tool for hacking offline Windows filesystems and bypassing login screens. Can do hashdumps, OSK-Backdoors, user enumeration and more. <b>You must have physical access to the computer to use this</b><br> 
+A modular tool for hacking offline Windows filesystems and bypassing login screens. Can do hashdumps, OSK-Backdoors, user enumeration and more. <br> 
 <img src="https://raw.githubusercontent.com/puckblush/tofu/main/tofu.png"></img>
 
 <h1> How it works : </h1>
@@ -16,7 +16,7 @@ When a Windows machine is shut down, unless it has Bitlocker or another encrypti
 <b>If you encountered an error along the lines of "CMD.exe does not exist at PATH", it could be an IO error; You can confirm this by trying to browse to the drive in the file explorer</b><br>
 
 <h1>Modules : </h1>
-Because tofu works on modules, it can be constantly expanded for different purposes. See the 'modules' section for examples.<br>
+Because tofu works on modules, it can be expanded for different purposes. See the 'modules' section for examples.<br>
 Current Modules:<br>
 1. <i>hashdump.py</i> - Dumps NTLM hashes from the target Windows filesystem<br>
 2. <i>osk_backdoor.py</i> - Backdoor osk.exe to bypass the login; also includes an 'unbackdoor' module<br>
