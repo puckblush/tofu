@@ -24,7 +24,8 @@ Current Modules:<br>
 4. <i>chrome_history.py</i> - Dump chrome history of all users on the Windows filesystem<br>
 5. <i>get_dpapi_masterkeys.py</i> - Dump DPAPI master keys from the Windows filesystem<br>
 6. <i>enum_unattend.py</i> - Enumerate unattend files<br>
-7. <i>memory_strings.py</i> - Search through the memory of the computer to find data
+7. <i>memory_strings.py</i> - Search through the memory of the computer to find data<br>
+8. <i>startup.py</i> - Inject a program into a user's startup directory<br>
 
 <h1>Usage : </h1>
 'list' : List all storage devices at /dev/ with a format of MSDOS, NTFS or -FVE-FS- (BITLOCKER) ; This will load the drive paths into memory<br>
