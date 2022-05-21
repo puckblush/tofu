@@ -18,7 +18,7 @@ def __main__(drive_name,drive_format):
 				pass
 		subprocess.check_call(["mount",drive_name,"tofu_tmp/windows_filesystem"])
 		print("[+] Drive mounted to 'tofu_tmp/windows_filesystem'")
-		possible_users = ["SYSTEM"]
+		possible_users = ["ANY"]
 		try:
 			alphanum = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
 			users = os.listdir("tofu_tmp/windows_filesystem/Users/")
@@ -26,7 +26,6 @@ def __main__(drive_name,drive_format):
 				if os.path.exists(f"tofu_tmp/windows_filesystem/Users/{user}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup"):
 
 					possible_users.append(user)
-			print("[#] Please note that windows does not run SYSTEM startup programs with elevated privileges")
 			for possible_user in possible_users:
 				print("[USER] " + possible_user)
 			user_to_startup = ""
@@ -47,7 +46,7 @@ def __main__(drive_name,drive_format):
 				else:
 					break
 
-			if user_to_startup != "SYSTEM":
+			if user_to_startup != "ANY":
 				startup_file = f"tofu_tmp/windows_filesystem/Users/{user_to_startup}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup"
 			else:
 				startup_file = f"tofu_tmp/windows_filesystem/ProgramData/Microsoft/Windows/Start Menu/Programs/StartUp"
