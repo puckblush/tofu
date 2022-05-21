@@ -26,6 +26,7 @@ def __main__(drive_name,drive_format):
 				if os.path.exists(f"tofu_tmp/windows_filesystem/Users/{user}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup"):
 
 					possible_users.append(user)
+			print("[#] Please note that windows does not run SYSTEM startup programs with elevated privileges")
 			for possible_user in possible_users:
 				print("[USER] " + possible_user)
 			user_to_startup = ""
