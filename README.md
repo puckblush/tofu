@@ -11,7 +11,7 @@ Current Modules:<br>
 1. <i>hashdump.py</i> - Dumps NTLM hashes from the target Windows filesystem<br>
 2. <i>osk_backdoor.py</i> - Backdoor osk.exe to bypass the login; also includes an 'unbackdoor' module<br>
 3. <i>list_users.py</i> - List the users with a profile on the Windows filesystem<br>
-4. <i>chrome_history.py</i> - Dump chrome history of all users on the Windows filesystem<br>
+4. <i>chrome.py</i> - Dump chrome history and login data of all users on the Windows filesystem<br>
 5. <i>get_dpapi_masterkeys.py</i> - Dump DPAPI master keys from the Windows filesystem<br>
 6. <i>enum_unattend.py</i> - Enumerate unattend files<br>
 7. <i>memory_strings.py</i> - Search through the memory of the computer to find data<br>
