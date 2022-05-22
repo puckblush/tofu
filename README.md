@@ -16,6 +16,7 @@ Current Modules:<br>
 6. <i>enum_unattend.py</i> - Enumerate unattend files<br>
 7. <i>memory_strings.py</i> - Search through the memory of the computer to find data<br>
 8. <i>startup.py</i> - Inject a program into a user's startup directory<br>
+9. <i>wifi.py</i> - Get Wi-Fi passwords with DPAPI<br>
 
 <h1>Usage : </h1>
 'list' : List all storage devices at /dev/ with a format of MSDOS, NTFS or -FVE-FS- (BITLOCKER) ; This will load the drive paths into memory<br>
