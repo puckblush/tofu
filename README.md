@@ -5,16 +5,6 @@ A modular tool for hacking offline Windows filesystems and bypassing login scree
 <h1> How it works : </h1>
 When a Windows machine is shut down, unless it has Bitlocker or another encryption service enabled, it's storage device contains everything stored on the device as if it was unlocked. This means that you can boot from an operating system on a bootable USB and access it's files - or even just connect the filesystem to another computer. <br>This tool helps for the part after booting from another OS (like linux) or connecting the filesystem to another computer; it has utilities that can dump NTLM password hashes, list users, install backdoors to spawn an elevated command prompt at the login screen and more. 
 
-<h1>How to use the osk_backdoor : </h1>
-1. Restart the Windows computer and as it's turning on, boot from a linux bootable USB (this process varies from computer to computer)<br>
-2. Download tofu, set it up and run it<br>
-3. Use the 'osk_backdoor.py' module after setting the options<br>
-4. Restart the computer, this time booting into Windows<br>
-5. In the accessibility settings (bottom right), select 'On Screen Keyboard'<br>
-6. Wait/Press 'On Screen Keyboard' again until it works<br>
-7. Success!<br>
-<b>If you encountered an error along the lines of "CMD.exe does not exist at PATH", it could be an IO error; You can confirm this by trying to browse to the drive in the file explorer</b><br>
-
 <h1>Modules : </h1>
 Because tofu works on modules, it can be expanded for different purposes. See the 'modules' section for examples.<br>
 Current Modules:<br>
