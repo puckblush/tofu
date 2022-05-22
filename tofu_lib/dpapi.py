@@ -93,6 +93,6 @@ def get_masterkeys(winpath,registry_sam,registry_system,registry_security):
 							print(f"[+++] Retrieved masterkey")
 					except OverflowError:
 						print("[#] Got something that wasn't a masterkey file; ignoring")
-	return dpapi_object.masterkeys
+	return dpapi_object
 
 
