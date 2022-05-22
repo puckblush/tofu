@@ -67,8 +67,29 @@ def get_masterkeys(winpath,registry_sam,registry_system,registry_security):
 	dpapi_object = DPAPI()
 	prekeys = dpapi_object.get_prekeys_form_registry_files(registry_system, registry_security, registry_sam)
 	#dpapi_object.get_prekeys_from_password()
+	print("[%] Before we continue, do you know a password for a user on this machine?")
+	password = input("PASSWORD [leave blank for nothing]: ")
 	users = os.listdir(f"{winpath}/Users")
+	passw_prekeys = ()
+	if password != "":
+                for user in users:
+                        print(user)
+                        try:
+                                sid_list = f"{winpath}/Users/{user}/AppData/Roaming/Microsoft/Protect/"
+                                for sid on os.listdir(sid_list):
+                                        if sid != "CREDHIST":
+                                                try:
+                                                        print(f"[#] New SID : {sid}")
+                                                        new_prekey = dpapi_object.get_prekeys_from_password(sid,password)
+                                                        passw_prekeys += new_prekey
+                                                except Exception as e:
+                                                        print(e)
+                        except Exception as e:
+                                print(e)
+                                
+                                                
 	prekey_list = []
+	prekey_list += passw_prekeys
 	for prekey in prekeys:
 		for prekey2 in prekey:
 			prekey_list.append(prekey2.hex())
@@ -93,6 +114,6 @@ def get_masterkeys(winpath,registry_sam,registry_system,registry_security):
 							print(f"[+++] Retrieved masterkey")
 					except OverflowError:
 						print("[#] Got something that wasn't a masterkey file; ignoring")
+					except Exception as e:
+                                                print(e)
 	return dpapi_object
-
-
