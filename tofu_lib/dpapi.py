@@ -59,41 +59,39 @@ def decrypt_chrome_experimental(winpath,users,registry_sam,registry_system):
 			for masterkey in masterkeys:
 				print(f"-- MASTERKEY / {masterkey}") 
 			print("[#] We have masterkeys. Now, lets' try them on Chrome")
-			
+
 def get_masterkeys(winpath,registry_sam,registry_system,registry_security):
 	
-	# this works by dumping all potential prekey candidates from the registry, and then cycling through the masterkey files to get a masterkey
-	# this method takes a ridiculous amount of time because DPAPI takes a while to decrypt the masterkey 
+	# this works by dumping all potential prekey candidates from the registry, loading the prekeys into a DPAPI object and then cycling through the masterkey files to get a masterkey
+	# this method takes a smaller
 	dpapi_object = DPAPI()
 	prekeys = dpapi_object.get_prekeys_form_registry_files(registry_system, registry_security, registry_sam)
 	#dpapi_object.get_prekeys_from_password()
-	print("[%] Before we continue, do you know a password for a user on this machine?")
+	print("[%] Before we continue, do you know any password for a user on this machine?")
 	password = input("PASSWORD [leave blank for nothing]: ")
 	users = os.listdir(f"{winpath}/Users")
 	passw_prekeys = ()
 	if password != "":
-                for user in users:
-                        print(user)
-                        try:
-                                sid_list = f"{winpath}/Users/{user}/AppData/Roaming/Microsoft/Protect/"
-                                for sid on os.listdir(sid_list):
-                                        if sid != "CREDHIST":
-                                                try:
-                                                        print(f"[#] New SID : {sid}")
-                                                        new_prekey = dpapi_object.get_prekeys_from_password(sid,password)
-                                                        passw_prekeys += new_prekey
-                                                except Exception as e:
-                                                        print(e)
-                        except Exception as e:
-                                print(e)
-                                
-                                                
+		for user in users:
+			print(user)
+			try:
+				sid_list = f"{winpath}/Users/{user}/AppData/Roaming/Microsoft/Protect/"
+				for sid in os.listdir(sid_list):
+					if sid != "CREDHIST":
+						try:
+							print(f"[#] New SID : {sid}")
+							new_prekey = dpapi_object.get_prekeys_from_password(sid,password)
+							passw_prekeys += new_prekey
+						except Exception as e:
+							print(e)
+			except Exception as e:
+				print(e)
+	
 	prekey_list = []
 	prekey_list += passw_prekeys
 	for prekey in prekeys:
 		for prekey2 in prekey:
-			prekey_list.append(prekey2.hex())
-	prekeys = prekey_list
+			dpapi_object.load_prekeys(prekey2.hex())
 	masterkey_array_length = 0
 	old_masterkey_array_length = 0
 	for user in users:
@@ -101,19 +99,14 @@ def get_masterkeys(winpath,registry_sam,registry_system,registry_security):
 		masterkey_files = f"{winpath}/Users/{user}/AppData/Roaming/Microsoft/Protect/"
 		for masterkey_file in glob.glob(f"{masterkey_files}/*/*"):
 			print(f"[#] Trying {masterkey_file}")
-			for prekey in prekeys:
-				masterkey_array_length = len(dpapi_object.masterkeys)
-				if prekey is not None:
-					print(f"[#] Trying Prekey Candidate {prekey}")
-					try:
-						dpapi_object.load_prekeys(prekey)
-						
-						dpapi_object.decrypt_masterkey_file(masterkey_file)
-						if masterkey_array_length > old_masterkey_array_length:
-							old_masterkey_array_length = masterkey_array_length
-							print(f"[+++] Retrieved masterkey")
-					except OverflowError:
-						print("[#] Got something that wasn't a masterkey file; ignoring")
-					except Exception as e:
-                                                print(e)
+			masterkey_array_length = len(dpapi_object.masterkeys)
+			try:		
+				dpapi_object.decrypt_masterkey_file(masterkey_file)
+				if masterkey_array_length > old_masterkey_array_length:
+					old_masterkey_array_length = masterkey_array_length
+					print(f"[+++] Retrieved masterkey")
+			except OverflowError:
+				print("[#] Got something that wasn't a masterkey file; ignoring")
+			except Exception as e:
+					pass
 	return dpapi_object
