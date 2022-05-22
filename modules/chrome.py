@@ -77,7 +77,7 @@ def __main__(drive_name,drive_format):
 							paths = masterkeys.find_chrome_database_file_offline("tofu_tmp/windows_filesystem/Users/")
 							passwords = masterkeys.decrypt_all_chrome(paths)
 							for i in passwords:
-								for passw in i:
+								for passw in passwords[i]:
 									print(passw)
 									history_file.write(str(passw))	
 								print("\n")
